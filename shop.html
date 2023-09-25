@@ -216,11 +216,25 @@
             }
 
             function purchaseClicked() {
-               alert('Thank you for your purchase')
+               let mail = prompt('Please provide mail');
                var cartItems = document.getElementsByClassName('cart-items')[0]
+               console.log(cartItems.childNodes)
+               const accountType = document.getElementsByClassName('cart-item-title')[0].innerText
+                  const amount= document.getElementsByClassName('cart-total-price')[0].innerText
+                  fetch('http://localhost:3000/test', {
+                     method: 'POST',
+                     headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                     },
+                     body: JSON.stringify({ "account":accountType, "amount": amount, "mail": mail  })
+                  })
+                     .then(response => response.json())
+                     .then(response => console.log(JSON.stringify(response)))
                while (cartItems.hasChildNodes()) {
                   cartItems.removeChild(cartItems.firstChild)
                }
+               alert('Thank you for your purchase. Please check mail for more details on this transaction')
                updateCartTotal()
             }
 
@@ -244,7 +258,6 @@
                var title = shopItem.getElementsByClassName('myaccount')[0].innerText
                var price = shopItem.getElementsByClassName('mycharge')[0].innerText
                //var imageSrc = shopItem.getElementsByClassName('shop-item-image')[0].src
-               console.log(title, price)
                addItemToCart(title, price)
                updateCartTotal()
             }
