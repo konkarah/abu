@@ -37,7 +37,7 @@ function mymailer(themail,account){
         auth: {
           // TODO: replace `user` and `pass` values from <https://forwardemail.net>
           user: "itsthindi@gmail.com",
-          pass: "ynbgzxupqcikhtig",
+          pass: "",
         },
       });
       
