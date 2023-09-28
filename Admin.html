@@ -86,34 +86,37 @@
         <table class="table">
           <thead>
             <tr>
-              <th>Firstname</th>
-              <th>Lastname</th>
-              <th>Email</th>
+              <th>Name</th>
+              <th>Account</th>
               <th>Amount</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>john@example.com</td>
-              <td>230</td>
-            </tr>
-            <tr>
-              <td>Mary</td>
-              <td>Moe</td>
-              <td>mary@example.com</td>
-              <td>230</td>
-            </tr>
-            <tr>
-              <td>July</td>
-              <td>Dooley</td>
-              <td>july@example.com</td>
-              <td>230</td>
-            </tr>
-            
+          <tbody id="data">            
           </tbody>
         </table>
       </div>
+
+      <script>
+       fetch("http://localhost:3000/myadmin").then(
+          res => {
+            res.json().then(
+              data => {
+                console.log(data);
+                if (data.length > 0) {
+
+                  var temp = "";
+                  data.forEach((itemData) => {
+                    temp += "<tr>";
+                    temp += "<td>" + itemData.custname + "</td>";
+                    temp += "<td>" + itemData.account + "</td>";
+                    temp += "<td>" + itemData.amount + "</td></tr>";
+                  });
+                  document.getElementById('data').innerHTML = temp;
+                }
+              }
+            )
+          }
+        )
+      </script>
 </body>
 </html>
