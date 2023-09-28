@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express')
 const app = express()
 const nodemailer = require('nodemailer');
@@ -13,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 mongoose.set("strictQuery", false);
 
-mongoose.connect('mongodb+srv://deh:1234@cluster0.lqv4l5b.mongodb.net/?retryWrites=true&w=majority',{useNewUrlParser: true,useUnifiedTopology: true})
+mongoose.connect(process.env.DBENV,{useNewUrlParser: true,useUnifiedTopology: true})
         .then(()=> console.log("Database connected"))
         .catch(err => console.log(err))
 
